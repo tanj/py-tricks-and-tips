@@ -6,6 +6,12 @@ authors = ["John te Bokkel <tanj.tanj@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+attrs = "^20.3.0"
+SQLAlchemy = "^1.4.10"
+SQLAlchemy-Utils = "^0.37.0"
+pyexcel = "^0.6.6"
+pyexcel-xls = "^0.6.2"
+pyexcel-xlsx = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0"
@@ -13,3 +19,22 @@ pytest = "^6.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py36', 'py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
