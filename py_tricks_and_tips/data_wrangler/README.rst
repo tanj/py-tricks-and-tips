@@ -7,3 +7,61 @@ sheet and turn it into a relational database.
 
 I'm planning to put together a bit of a step by step to help you learn
 to explore the data with an interactive shell.
+
+.. code-block:: python
+
+    In [1]: %run convert_extruder_data.py -h
+    usage: convert_extruder_data.py [-h] [--dblocation DBLOCATION] EXTRUDER_FILE
+    
+    Convert Extruder Data to SQL
+    
+    positional arguments:
+      EXTRUDER_FILE         Extruder File [*.csv, *.xls, *.xlsx]
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --dblocation DBLOCATION
+                            path to sqlite file
+    
+    In [2]: # now we have the session variable from the end of convert_extruder_data.py in this interactive shell
+    
+    In [3]: # lets get the first record and explore the relationships that we created in SQL alchemy
+    
+    In [4]: rec = session.query(TRecord).get(1)
+    
+    In [5]: # if we want to see what's in `rec` we can type the var in the interactive
+            # shell and it will automatically show us what it is with the repr() function
+    
+    In [6]: rec
+    Out[6]: TRecord(ixRecord=1, dtTimestamp=datetime.date(2021, 4, 1), dblAmbientTemp=25.513465522275933, dblAmbientHumidity=50.0)
+    
+    In [7]: # That nice looking representation comes from the @generic_repr decorator we used on the SqlAlchemy model
+    
+    In [8]: # lets take a look at that relationship
+    
+    In [9]: rec.norm_data
+    Out[9]:
+    [TNormalizedData(ixNormalizeData=1, ixRecord=1, ixDataLocation=1, dblPressure=22.0, dblTemperature=150.0),
+     TNormalizedData(ixNormalizeData=2, ixRecord=1, ixDataLocation=2, dblPressure=83.0, dblTemperature=165.0),
+     TNormalizedData(ixNormalizeData=3, ixRecord=1, ixDataLocation=3, dblPressure=52.0, dblTemperature=20.0),
+     TNormalizedData(ixNormalizeData=4, ixRecord=1, ixDataLocation=4, dblPressure=30.0, dblTemperature=27.0)]
+    
+    In [10]: # we have a list of the normalized pressure and temperature data
+    In [11]: # what did those ixDataLocations represent again? let's use a list comprehension to find out
+    
+    In [12]: # a list comprehension is fast way to loop through data and can be used for filtering as well
+    
+    In [13]: [x.data_location for x in rec.norm_data]
+    Out[13]:
+    [TDataLocation(ixDataLocation=1, sDataLocation='Mixer'),
+     TDataLocation(ixDataLocation=2, sDataLocation='Extruder'),
+     TDataLocation(ixDataLocation=3, sDataLocation='Chilled Water Inlet'),
+     TDataLocation(ixDataLocation=4, sDataLocation='Chilled Water Outlet')]
+    
+    In [14]: # the list comprehension looped through the list of `norm_data` and returned a list of TDataLocation
+    In [15]: [x.data_location for x in rec.norm_data if "Chilled" in x.data_location.sDataLocation]
+    Out[15]:
+    [TDataLocation(ixDataLocation=3, sDataLocation='Chilled Water Inlet'),
+     TDataLocation(ixDataLocation=4, sDataLocation='Chilled Water Outlet')]
+    
+    In [16]: # That was a bit contrived, but it does show some of the power of list comprehensions

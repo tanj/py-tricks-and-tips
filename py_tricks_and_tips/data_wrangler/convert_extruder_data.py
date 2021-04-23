@@ -14,7 +14,6 @@ from py_tricks_and_tips.data_wrangler.models import (
 )
 from py_tricks_and_tips.data_wrangler.locations import (
     data_locations,
-    ELoc,
     map_column_names,
 )
 
@@ -71,6 +70,12 @@ def process_extruder(session, extruder_file):
         raise e
 
 
+def get_session(engine):
+    eng = create_engine(engine)
+    DBSession = sessionmaker(bind=eng)
+    return DBSession()
+
+
 def main():
     parser = argparse.ArgumentParser(description="Convert Extruder Data to SQL")
     parser.add_argument(
@@ -90,6 +95,10 @@ def main():
     process_extruder(Session, args.EXTRUDER_FILE)
     return
 
+
+# Normally you wouldn't leave something like this here, but I want to
+# use this interactively.
+session = get_session("sqlite:///extruder.db")
 
 if __name__ == "__main__":
     main()
