@@ -5,8 +5,54 @@ Data Wrangler
 This module is to give you an idea of how you could take an excel
 sheet and turn it into a relational database.
 
-I'm planning to put together a bit of a step by step to help you learn
-to explore the data with an interactive shell.
+Excel to DB Conversion
+----------------------
+
+The excel file consists of the following headers:
+
+- Timestamp
+- Ambient Temperature
+- Humidity
+- Mixer Temperature
+- Mixer Pressure
+- Extruder Temperature
+- Extruder Pressure
+- Chilled Water Inlet Pressure
+- Chilled Water Inlet Temperature
+- Chilled Water Outlet Pressure
+- Chilled Water Outlet Temperature
+
+We can convert that into a normalized database like:
+
+.. image:: extruder_db.png
+           :alt: Extruder Database
+
+Table ``tDataLocation`` contains the following values:
+
++--------------+-----------------------+
+|ixDataLocation|sDataLocation          |
++--------------+-----------------------+
+|1             |Mixer                  |
++--------------+-----------------------+
+|2             |Extruder               |
++--------------+-----------------------+
+|3             |Chilled water Inlet    |
++--------------+-----------------------+
+|4             |Chilled Water Outlet   |
++--------------+-----------------------+
+
+You can see we were able to reduce the the four sets of Pressure and
+Temperature pairs into a table and link their types to a seperate
+table. This makes it a trivial matter to add more pairs of data and
+still use the same code to run analysis.
+
+Interact with the DB
+--------------------
+
+You can use any python interactive shell, but I used `ptipython
+<https://github.com/prompt-toolkit/ptpython>`_ which is ptpython and
+ipython combined. Both ``ipython`` and ``ptpython`` can be installed
+with ``pip``.
 
 .. code-block:: python
 
