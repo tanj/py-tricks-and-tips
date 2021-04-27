@@ -58,7 +58,8 @@ I used three techniques to make this conversion clean and avoid magic numbers.
 This gives us the column map:
 
 .. code-block:: python
-   map_column_names = {
+    
+    map_column_names = {
         # key: value
         ELoc.Mixer: NormColNames("Mixer Pressure", "Mixer Temperature"),
         ELoc.Extruder: NormColNames("Extruder Pressure", "Extruder Temperature"),
@@ -74,8 +75,9 @@ Which lets the code where we use it look like this:
 
 
 .. code-block:: python
-   # convert_extruder_data.py: def process_extruder()
-       for key, value in map_column_names.items():
+    
+    # convert_extruder_data.py: def process_extruder()
+        for key, value in map_column_names.items():
             record.norm_data.append(
                 TNormalizedData(
                     ixDataLocation=key.value,
