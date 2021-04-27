@@ -57,17 +57,32 @@ I used three techniques to make this conversion clean and avoid magic numbers.
 
 This gives us the column map:
 
-.. literalinclude:: locations.py
-   :linenos:
-   :language: python
-   :lines: 37-47
+.. code-block:: python
+   map_column_names = {
+        # key: value
+        ELoc.Mixer: NormColNames("Mixer Pressure", "Mixer Temperature"),
+        ELoc.Extruder: NormColNames("Extruder Pressure", "Extruder Temperature"),
+        ELoc.ChilledWaterInlet: NormColNames(
+            "Chilled Water Inlet Pressure", "Chilled Water Inlet Temperature"
+        ),
+        ELoc.ChilledWaterOutlet: NormColNames(
+            "Chilled Water Outlet Pressure", "Chilled Water Outlet Temperature"
+        ),
+    }
 
 Which lets the code where we use it look like this:
 
-.. literalinclude:: convert_extruder_data.py
-   :linenos:
-   :language: python
-   :lines: 57-64
+
+.. code-block:: python
+   # convert_extruder_data.py: def process_extruder()
+       for key, value in map_column_names.items():
+            record.norm_data.append(
+                TNormalizedData(
+                    ixDataLocation=key.value,
+                    dblPressure=row[colnames.index(value.pres)],
+                    dblTemperature=row[colnames.index(value.temp)],
+                ),
+            )
 
 Interact with the DB
 --------------------
