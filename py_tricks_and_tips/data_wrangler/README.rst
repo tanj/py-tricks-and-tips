@@ -77,12 +77,15 @@ Which lets the code where we use it look like this:
 .. code-block:: python
     
     # convert_extruder_data.py: def process_extruder()
-        for key, value in map_column_names.items():
+        # .items() returns (key, value)
+        for location, column in map_column_names.items():
             record.norm_data.append(
                 TNormalizedData(
-                    ixDataLocation=key.value,
-                    dblPressure=row[colnames.index(value.pres)],
-                    dblTemperature=row[colnames.index(value.temp)],
+                    ixDataLocation=location.value,
+                    # colnames is a list of column names returned by pyexcel
+                    # .index(val) finds the index of val in the array
+                    dblPressure=row[colnames.index(column.pres)],
+                    dblTemperature=row[colnames.index(column.temp)],
                 ),
             )
 

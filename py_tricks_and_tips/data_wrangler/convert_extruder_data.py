@@ -54,12 +54,13 @@ def process_extruder(session, extruder_file):
             dblAmbientTemp=row[colnames.index("Ambient Temperature")],
             dblAmbientHumidity=row[colnames.index("Humidity")],
         )
-        for key, value in map_column_names.items():
+        # .items() returns (key, value)
+        for location, column in map_column_names.items():
             record.norm_data.append(
                 TNormalizedData(
-                    ixDataLocation=key.value,
-                    dblPressure=row[colnames.index(value.pres)],
-                    dblTemperature=row[colnames.index(value.temp)],
+                    ixDataLocation=location.value,
+                    dblPressure=row[colnames.index(column.pres)],
+                    dblTemperature=row[colnames.index(column.temp)],
                 ),
             )
         session.add(record)
