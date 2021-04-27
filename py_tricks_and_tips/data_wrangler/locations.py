@@ -35,6 +35,7 @@ data_locations = [
 ]
 
 map_column_names = {
+    # key: value
     ELoc.Mixer: NormColNames("Mixer Pressure", "Mixer Temperature"),
     ELoc.Extruder: NormColNames("Extruder Pressure", "Extruder Temperature"),
     ELoc.ChilledWaterInlet: NormColNames(

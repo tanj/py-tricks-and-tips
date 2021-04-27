@@ -46,6 +46,29 @@ Temperature pairs into a table and link their types to a seperate
 table. This makes it a trivial matter to add more pairs of data and
 still use the same code to run analysis.
 
+Converting Columns to Normalized Tables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+I used three techniques to make this conversion clean and avoid magic numbers.
+
+- `dictionary <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>`_
+- Enum type `IntEnum <https://docs.python.org/3/library/enum.html?#enum.IntEnum>`_
+- data class using `attrs <https://www.attrs.org/en/stable/examples.html>`_
+
+This gives us the column map:
+
+.. literalinclude:: locations.py
+   :linenos:
+   :language: python
+   :lines: 37-47
+
+Which lets the code where we use it look like this:
+
+.. literalinclude:: convert_extruder_data.py
+   :linenos:
+   :language: python
+   :lines: 57-64
+
 Interact with the DB
 --------------------
 
