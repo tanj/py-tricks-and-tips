@@ -193,6 +193,34 @@ toml = "*"
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
+name = "pytest-mock"
+version = "3.6.0"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+pytest = ">=5.0"
+
+[package.extras]
+dev = ["pre-commit", "tox", "pytest-asyncio"]
+
+[[package]]
+name = "pytest-raises"
+version = "0.11"
+description = "An implementation of pytest.raises as a pytest.mark fixture"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pytest = ">=3.2.2"
+
+[package.extras]
+develop = ["pylint", "pytest-cov"]
+
+[[package]]
 name = "six"
 version = "1.15.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -293,7 +321,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "96126a1fdb1b4dd702335692094d54949545e3adfb4b3bac71b77aa4c634b714"
+content-hash = "a2d4b3bf60d015a896e95cfdfa8d61084bc96306b3aaa2bbe49c92662673e767"
 
 [metadata.files]
 atomicwrites = [
@@ -403,6 +431,14 @@ pyparsing = [
 pytest = [
     {file = "pytest-6.2.3-py3-none-any.whl", hash = "sha256:6ad9c7bdf517a808242b998ac20063c41532a570d088d77eec1ee12b0b5574bc"},
     {file = "pytest-6.2.3.tar.gz", hash = "sha256:671238a46e4df0f3498d1c3270e5deb9b32d25134c99b7d75370a68cfbe9b634"},
+]
+pytest-mock = [
+    {file = "pytest-mock-3.6.0.tar.gz", hash = "sha256:f7c3d42d6287f4e45846c8231c31902b6fa2bea98735af413a43da4cf5b727f1"},
+    {file = "pytest_mock-3.6.0-py3-none-any.whl", hash = "sha256:952139a535b5b48ac0bb2f90b5dd36b67c7e1ba92601f3a8012678c4bd7f0bcc"},
+]
+pytest-raises = [
+    {file = "pytest-raises-0.11.tar.gz", hash = "sha256:f64a4dbcb5f89c100670fe83d87a5cd9d956586db461c5c628f7eb94b749c90b"},
+    {file = "pytest_raises-0.11-py2.py3-none-any.whl", hash = "sha256:33a1351f2debb9f74ca6ef70e374899f608a1217bf13ca4a0767f37b49e9cdda"},
 ]
 six = [
     {file = "six-1.15.0-py2.py3-none-any.whl", hash = "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"},
