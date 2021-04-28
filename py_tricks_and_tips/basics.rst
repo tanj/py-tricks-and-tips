@@ -15,7 +15,7 @@ Ok, why not start here rather than it always being an after thought?
 If you did as I suggested in the opening paragraph you would have seen
 this documentation on the int object type.
 
-.. code-block:: python
+.. code-block::
     
     >>>help(1)
     Help on int object:
@@ -56,7 +56,7 @@ the code in the future. It is also very easy to do. Take a look in
 function. Any string in the opening line of the function, class, or
 file will be used as documentation for that item.
 
-.. code-block:: python
+.. code-block::
     
     >>>help(greet)
     Help on function greet in module py_tricks_and_tips.basics:
